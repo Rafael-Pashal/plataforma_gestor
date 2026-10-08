@@ -1,0 +1,30 @@
+# Node
+node_modules/
+.next/
+coverage/
+playwright-report/
+test-results/
+
+# .NET
+bin/
+obj/
+*.user
+TestResults/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+appsettings.Development.json
+*.pfx
+*.pem
+*.key
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# IaC
+infra/.generated/

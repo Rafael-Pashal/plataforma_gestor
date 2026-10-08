@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../PlataformaGestor.Application/PlataformaGestor.Application.csproj" />
+    <ProjectReference Include="../PlataformaGestor.Infrastructure/PlataformaGestor.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+{
+  "name": "plataforma-gestor",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix src/frontend install",
+    "dev": "npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "npm --prefix src/frontend run dev",
+    "dev:backend": "dotnet run --project src/backend/PlataformaGestor.Api",
+    "build": "npm-run-all build:frontend build:backend",
+    "build:frontend": "npm --prefix src/frontend run build",
+    "build:backend": "dotnet build PlataformaGestor.sln --configuration Release",
+    "lint": "npm --prefix src/frontend run lint",
+    "test": "npm-run-all test:frontend test:backend",
+    "test:frontend": "npm --prefix src/frontend run test",
+    "test:backend": "dotnet test PlataformaGestor.sln --configuration Release"
+  },
+  "devDependencies": {
+    "npm-run-all": "latest"
+  }
+}

@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../PlataformaGestor.Application/PlataformaGestor.Application.csproj" /><ProjectReference Include="../PlataformaGestor.Domain/PlataformaGestor.Domain.csproj" /></ItemGroup></Project>

@@ -1,0 +1,18 @@
+trigger:
+- main
+pr:
+- main
+pool:
+  vmImage: ubuntu-latest
+steps:
+- task: UseDotNet@2
+  inputs: { packageType: sdk, version: 8.x }
+- script: dotnet restore PlataformaGestor.sln
+- script: dotnet build PlataformaGestor.sln --configuration Release --no-restore
+- script: dotnet test PlataformaGestor.sln --configuration Release --no-build
+- task: NodeTool@0
+  inputs: { versionSpec: lts/* }
+- script: npm ci
+  workingDirectory: src/frontend
+- script: npm run lint && npm run test && npm run build
+  workingDirectory: src/frontend
