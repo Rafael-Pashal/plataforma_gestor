@@ -1,11 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddProblemDetails();
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 app.UseExceptionHandler();
-if (app.Environment.IsDevelopment()) app.MapOpenApi();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 app.MapHealthChecks("/health");
 app.MapGet("/api/v1/status", () => Results.Ok(new
 {
