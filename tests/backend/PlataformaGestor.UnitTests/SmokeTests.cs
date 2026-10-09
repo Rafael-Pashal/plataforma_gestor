@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace PlataformaGestor.UnitTests;
 public sealed class SmokeTests
 {

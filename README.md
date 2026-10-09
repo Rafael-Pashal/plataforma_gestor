@@ -69,7 +69,9 @@ Usuário
 | API management | Azure API Management |
 | Segredos | Azure Key Vault e managed identities |
 | Observabilidade | Application Insights, Azure Monitor e Log Analytics |
-| DevOps | Azure DevOps ou GitHub Enterprise, com Bicep ou Terraform |
+| DevOps | TODO(decision): definir plataforma oficial de CI/CD entre Azure DevOps e GitHub Enterprise; Bicep ou Terraform |
+
+Neste momento, o GitHub Actions possui um workflow CI ativo e já executado. O repositório também contém um `azure-pipelines.yml`, mas não há evidência disponível de execução ou integração ativa no Azure DevOps. A plataforma oficial continua pendente de decisão.
 | Testes | xUnit, Playwright, testes de contrato, SAST, SCA e DAST |
 
 ## Integrações
