@@ -1,0 +1,52 @@
+services:
+  api-dev:
+    image: plataforma-gestor-api:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: src/backend/PlataformaGestor.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "${DEPLOY_BIND_ADDRESS:-127.0.0.1}:5080:8080"
+    restart: unless-stopped
+
+  web-dev:
+    image: plataforma-gestor-web:${IMAGE_TAG:-local}
+    build:
+      context: src/frontend
+      dockerfile: Dockerfile
+    environment:
+      HOSTNAME: 0.0.0.0
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      PORT: "3000"
+    ports:
+      - "${DEPLOY_BIND_ADDRESS:-127.0.0.1}:8081:3000"
+    restart: unless-stopped
+
+  api-hml:
+    image: plataforma-gestor-api:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: src/backend/PlataformaGestor.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "${DEPLOY_BIND_ADDRESS:-127.0.0.1}:5081:8080"
+    restart: unless-stopped
+
+  web-hml:
+    image: plataforma-gestor-web:${IMAGE_TAG:-local}
+    build:
+      context: src/frontend
+      dockerfile: Dockerfile
+    environment:
+      HOSTNAME: 0.0.0.0
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      PORT: "3000"
+    ports:
+      - "${DEPLOY_BIND_ADDRESS:-127.0.0.1}:8082:3000"
+    restart: unless-stopped

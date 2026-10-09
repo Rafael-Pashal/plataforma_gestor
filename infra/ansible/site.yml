@@ -1,0 +1,26 @@
+---
+- name: Prepare the Plataforma Gestor deployment host
+  hosts: plataforma_gestor
+  gather_facts: true
+  become: false
+  tasks:
+    - name: Require the approved Linux host
+      ansible.builtin.assert:
+        that:
+          - ansible_facts["system"] == "Linux"
+          - ansible_facts["distribution"] == "Ubuntu"
+        fail_msg: "Deployment is approved only on the existing Ubuntu Linux VM."
+
+    - name: Check Docker daemon access without changing its configuration
+      ansible.builtin.command: docker info
+      changed_when: false
+
+    - name: Check Docker Compose availability
+      ansible.builtin.command: docker compose version
+      changed_when: false
+
+    - name: Prepare the deployment user's runtime directory
+      ansible.builtin.file:
+        path: "{{ lookup('env', 'HOME') }}/.local/share/plataforma-gestor"
+        state: directory
+        mode: "0750"

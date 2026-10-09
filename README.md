@@ -69,9 +69,9 @@ Usuário
 | API management | Azure API Management |
 | Segredos | Azure Key Vault e managed identities |
 | Observabilidade | Application Insights, Azure Monitor e Log Analytics |
-| DevOps | TODO(decision): definir plataforma oficial de CI/CD entre Azure DevOps e GitHub Enterprise; Bicep ou Terraform |
+| DevOps | GitHub Actions para CI/CD; Ansible para configurar o host Linux on-premises |
 
-Neste momento, o GitHub Actions possui um workflow CI ativo e já executado. O repositório também contém um `azure-pipelines.yml`, mas não há evidência disponível de execução ou integração ativa no Azure DevOps. A plataforma oficial continua pendente de decisão.
+GitHub Actions é a plataforma oficial de CI/CD. Pull requests executam build, testes e verificações de segurança em runners hospedados pelo GitHub. Deploys de DEV são automáticos após a aprovação dos gates em `main`; HML é manual e requer aprovação do ambiente no GitHub. O deploy usa um runner self-hosted restrito à branch `main`, em host Linux on-premises, com containers e portas próprias. O `azure-pipelines.yml` é legado e não participa do fluxo oficial.
 | Testes | xUnit, Playwright, testes de contrato, SAST, SCA e DAST |
 
 ## Integrações
@@ -160,6 +160,10 @@ O comando `npm run dev` inicia o frontend e a API em paralelo. Também podem ser
 npm run dev:frontend
 npm run dev:backend
 ```
+
+O frontend da Plataforma Gestor fica disponível na porta `8081`, distinta da porta `8080` usada pelo `painel_viagem`. A API deste projeto usa a porta `5080`.
+
+Nos ambientes implantados na VM, DEV usa `http://192.168.97.221:8081` (web) e `http://192.168.97.221:5080` (API); HML usa `http://192.168.97.221:8082` (web) e `http://192.168.97.221:5081` (API). As portas são vinculadas somente à interface interna `eth2`. O `painel_viagem` e sua porta `8080` não fazem parte deste deploy. SSO Entra ID e DNS/TLS ainda precisam ser implementados.
 
 Para validar o projeto:
 
